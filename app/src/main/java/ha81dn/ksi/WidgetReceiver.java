@@ -36,26 +36,26 @@ public class WidgetReceiver extends AppWidgetProvider {
     }
 
     private static void applyOnClick(Context context, RemoteViews remoteViews, int widgetId) {
-        remoteViews.setOnClickPendingIntent(R.id.ivImage, makePendingIntent(context, widgetId, "ITEM", "IMAGE"));
-        remoteViews.setOnClickPendingIntent(R.id.tvMonTitle, makePendingIntent(context, widgetId, "ITEM", "MONDAY"));
-        remoteViews.setOnClickPendingIntent(R.id.tvMonBody, makePendingIntent(context, widgetId, "ITEM", "MONDAY"));
-        remoteViews.setOnClickPendingIntent(R.id.tvTueTitle, makePendingIntent(context, widgetId, "ITEM", "TUESDAY"));
-        remoteViews.setOnClickPendingIntent(R.id.tvTueBody, makePendingIntent(context, widgetId, "ITEM", "TUESDAY"));
-        remoteViews.setOnClickPendingIntent(R.id.tvWedTitle, makePendingIntent(context, widgetId, "ITEM", "WEDNESDAY"));
-        remoteViews.setOnClickPendingIntent(R.id.tvWedBody, makePendingIntent(context, widgetId, "ITEM", "WEDNESDAY"));
-        remoteViews.setOnClickPendingIntent(R.id.tvThuTitle, makePendingIntent(context, widgetId, "ITEM", "THURSDAY"));
-        remoteViews.setOnClickPendingIntent(R.id.tvThuBody, makePendingIntent(context, widgetId, "ITEM", "THURSDAY"));
-        remoteViews.setOnClickPendingIntent(R.id.tvFriTitle, makePendingIntent(context, widgetId, "ITEM", "FRIDAY"));
-        remoteViews.setOnClickPendingIntent(R.id.tvFriBody, makePendingIntent(context, widgetId, "ITEM", "FRIDAY"));
+        remoteViews.setOnClickPendingIntent(R.id.ivImage, makePendingIntent(context, widgetId, 1, "ITEM", "IMAGE"));
+        remoteViews.setOnClickPendingIntent(R.id.tvMonTitle, makePendingIntent(context, widgetId, 2, "ITEM", "MONDAY"));
+        remoteViews.setOnClickPendingIntent(R.id.tvMonBody, makePendingIntent(context, widgetId, 3, "ITEM", "MONDAY"));
+        remoteViews.setOnClickPendingIntent(R.id.tvTueTitle, makePendingIntent(context, widgetId, 4, "ITEM", "TUESDAY"));
+        remoteViews.setOnClickPendingIntent(R.id.tvTueBody, makePendingIntent(context, widgetId, 5, "ITEM", "TUESDAY"));
+        remoteViews.setOnClickPendingIntent(R.id.tvWedTitle, makePendingIntent(context, widgetId, 6, "ITEM", "WEDNESDAY"));
+        remoteViews.setOnClickPendingIntent(R.id.tvWedBody, makePendingIntent(context, widgetId, 7, "ITEM", "WEDNESDAY"));
+        remoteViews.setOnClickPendingIntent(R.id.tvThuTitle, makePendingIntent(context, widgetId, 8, "ITEM", "THURSDAY"));
+        remoteViews.setOnClickPendingIntent(R.id.tvThuBody, makePendingIntent(context, widgetId, 9, "ITEM", "THURSDAY"));
+        remoteViews.setOnClickPendingIntent(R.id.tvFriTitle, makePendingIntent(context, widgetId, 10, "ITEM", "FRIDAY"));
+        remoteViews.setOnClickPendingIntent(R.id.tvFriBody, makePendingIntent(context, widgetId, 11, "ITEM", "FRIDAY"));
     }
 
-    private static PendingIntent makePendingIntent(Context context, int widgetId, String extraName, String extraValue) {
+    private static PendingIntent makePendingIntent(Context context, int widgetId, int reqId, String extraName, String extraValue) {
         Intent intent = new Intent(context, WidgetReceiver.class);
         intent.setAction("com.ha81dn.ksi.UPDATE");
         intent.addCategory(Intent.CATEGORY_DEFAULT);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
         intent.putExtra(extraName, extraValue);
-        return PendingIntent.getBroadcast(context, widgetId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        return PendingIntent.getBroadcast(context, reqId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     private static Intent makeIntent(Context context, int widgetId, String extraName, String extraValue) {
@@ -128,7 +128,7 @@ public class WidgetReceiver extends AppWidgetProvider {
             Calendar date;
             SimpleDateFormat sdf;
             StringBuilder sb;
-            String result = "a=b";
+            String result = null;
             String line;
             String prefix = "";
             item = urls[0];
@@ -252,46 +252,14 @@ public class WidgetReceiver extends AppWidgetProvider {
                 conn.connect();
                 if (conn.getResponseCode() != 200) {
                     conn.disconnect();
-                    date.add(Calendar.DATE, 1);
+                    date.add(Calendar.DATE, -7);
                     myFileUrl = new URL("https://www.zdf.de/show/die-kuechenschlacht/die-kuechenschlacht-vom-" + date.get(Calendar.DAY_OF_MONTH) + "-" + sdf.format(date.getTime()).toLowerCase() + "-" + date.get(Calendar.YEAR) + "-100.html");
                     conn = (HttpsURLConnection) myFileUrl.openConnection();
                     conn.setDoInput(true);
                     conn.connect();
                     if (conn.getResponseCode() != 200) {
                         conn.disconnect();
-                        date.add(Calendar.DATE, 1);
-                        myFileUrl = new URL("https://www.zdf.de/show/die-kuechenschlacht/die-kuechenschlacht-vom-" + date.get(Calendar.DAY_OF_MONTH) + "-" + sdf.format(date.getTime()).toLowerCase() + "-" + date.get(Calendar.YEAR) + "-100.html");
-                        conn = (HttpsURLConnection) myFileUrl.openConnection();
-                        conn.setDoInput(true);
-                        conn.connect();
-                        if (conn.getResponseCode() != 200) {
-                            conn.disconnect();
-                            date.add(Calendar.DATE, -9);
-                            myFileUrl = new URL("https://www.zdf.de/show/die-kuechenschlacht/die-kuechenschlacht-vom-" + date.get(Calendar.DAY_OF_MONTH) + "-" + sdf.format(date.getTime()).toLowerCase() + "-" + date.get(Calendar.YEAR) + "-100.html");
-                            conn = (HttpsURLConnection) myFileUrl.openConnection();
-                            conn.setDoInput(true);
-                            conn.connect();
-                            if (conn.getResponseCode() != 200) {
-                                conn.disconnect();
-                                date.add(Calendar.DATE, 1);
-                                myFileUrl = new URL("https://www.zdf.de/show/die-kuechenschlacht/die-kuechenschlacht-vom-" + date.get(Calendar.DAY_OF_MONTH) + "-" + sdf.format(date.getTime()).toLowerCase() + "-" + date.get(Calendar.YEAR) + "-100.html");
-                                conn = (HttpsURLConnection) myFileUrl.openConnection();
-                                conn.setDoInput(true);
-                                conn.connect();
-                                if (conn.getResponseCode() != 200) {
-                                    conn.disconnect();
-                                    date.add(Calendar.DATE, 1);
-                                    myFileUrl = new URL("https://www.zdf.de/show/die-kuechenschlacht/die-kuechenschlacht-vom-" + date.get(Calendar.DAY_OF_MONTH) + "-" + sdf.format(date.getTime()).toLowerCase() + "-" + date.get(Calendar.YEAR) + "-100.html");
-                                    conn = (HttpsURLConnection) myFileUrl.openConnection();
-                                    conn.setDoInput(true);
-                                    conn.connect();
-                                    if (conn.getResponseCode() != 200) {
-                                        conn.disconnect();
-                                        return prefix + "Keine Küchenschlacht innerhalb der letzten zwei Wochen gefunden!= ";
-                                    }
-                                }
-                            }
-                        }
+                        return prefix + ": Keine Küchenschlacht innerhalb der letzten zwei Wochen gefunden!= ";
                     }
                 }
                 is = conn.getInputStream();
