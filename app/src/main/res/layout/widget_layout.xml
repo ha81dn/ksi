@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="#AA000000"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ivImage"
+        android:layout_marginTop="2dip"
+        android:layout_marginLeft="2dip"
+        android:layout_marginRight="2dip"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.3"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/tvImageDate"
+        android:textColor="#FFF"
+        android:layout_marginEnd="2dip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="textEnd"
+        android:textSize="9sp" />
+
+    <TextView
+        android:id="@+id/tvMonTitle"
+        android:textColor="#FFF"
+        android:layout_marginStart="2dip"
+        android:layout_marginTop="2dip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="11sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvMonBody"
+        android:textColor="#FFF"
+        android:layout_marginStart="2dip"
+        android:layout_marginEnd="2dip"
+        android:layout_marginBottom="2dip"
+        android:textSize="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvTueTitle"
+        android:textColor="#FFF"
+        android:layout_marginStart="2dip"
+        android:layout_marginTop="2dip"
+        android:textSize="11sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvTueBody"
+        android:textColor="#FFF"
+        android:layout_marginStart="2dip"
+        android:layout_marginEnd="2dip"
+        android:layout_marginBottom="2dip"
+        android:textSize="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvWedTitle"
+        android:textColor="#FFF"
+        android:layout_marginStart="2dip"
+        android:layout_marginTop="2dip"
+        android:textSize="11sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvWedBody"
+        android:textColor="#FFF"
+        android:layout_marginStart="2dip"
+        android:layout_marginEnd="2dip"
+        android:layout_marginBottom="2dip"
+        android:textSize="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvThuTitle"
+        android:textColor="#FFF"
+        android:layout_marginStart="2dip"
+        android:layout_marginTop="2dip"
+        android:textSize="11sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvThuBody"
+        android:textColor="#FFF"
+        android:layout_marginStart="2dip"
+        android:layout_marginEnd="2dip"
+        android:layout_marginBottom="2dip"
+        android:textSize="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvFriTitle"
+        android:textColor="#FFF"
+        android:layout_marginStart="2dip"
+        android:layout_marginTop="2dip"
+        android:textSize="11sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvFriBody"
+        android:textColor="#FFF"
+        android:layout_marginStart="2dip"
+        android:layout_marginEnd="2dip"
+        android:layout_marginBottom="2dip"
+        android:textSize="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
