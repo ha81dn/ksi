@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Küchenschlacht-Info</string>
     <string name="image_date">Foto vom %1$s</string>
+    <string name="initialized">Küchenschlacht-Info initialisiert</string>
+    <string name="touched">Küchenschlacht-Info wird aktualisiert, bitte warten&#8230;</string>
+    <string name="downloading">Küchenschlacht-Daten werden abgerufen, bitte warten&#8230;</string>
+    <string name="finished">Küchenschlacht-Info erfolgreich aktualisiert</string>
 </resources>

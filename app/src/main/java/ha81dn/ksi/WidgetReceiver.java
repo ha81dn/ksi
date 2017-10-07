@@ -25,7 +25,7 @@ import java.util.Locale;
 import javax.net.ssl.HttpsURLConnection;
 
 public class WidgetReceiver extends AppWidgetProvider {
-    static AsyncTask<String, Void, String> currentTask;
+    static AsyncTask<String, String, String> currentTask;
 
     private static void prepareWidget(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int widgetId : appWidgetIds) {
@@ -74,6 +74,7 @@ public class WidgetReceiver extends AppWidgetProvider {
         ComponentName thisWidget = new ComponentName(context, WidgetReceiver.class);
         int[] allWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
         prepareWidget(context, appWidgetManager, allWidgetIds);
+        Toast.makeText(context, context.getString(R.string.initialized), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -84,6 +85,7 @@ public class WidgetReceiver extends AppWidgetProvider {
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
+        //Toast.makeText(context, context.getString(R.string.touched), Toast.LENGTH_SHORT).show();
         if (intent.getAction().equals("com.ha81dn.ksi.UPDATE")) {
             int widgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
             if (widgetId == -1) return;
@@ -111,7 +113,7 @@ public class WidgetReceiver extends AppWidgetProvider {
         }
     }
 
-    private static class HttpAsyncTask extends AsyncTask<String, Void, String> {
+    private static class HttpAsyncTask extends AsyncTask<String, String, String> {
         AppWidgetManager appWidgetManager;
         Context context;
         int targetWidgetId;
@@ -139,6 +141,7 @@ public class WidgetReceiver extends AppWidgetProvider {
                 date = Calendar.getInstance(Locale.GERMAN);
                 sdf = new SimpleDateFormat("MMMM", Locale.GERMAN);
 
+                publishProgress(context.getString(R.string.downloading));
                 switch (item) {
                     case "IMAGE":
                         date = Calendar.getInstance(Locale.GERMAN);
@@ -292,14 +295,20 @@ public class WidgetReceiver extends AppWidgetProvider {
                 }
 
             } catch (Exception error) {
-                //return error.getLocalizedMessage();
+                return error.getLocalizedMessage();
             }
             return result;
         }
 
         @Override
+        protected void onProgressUpdate(String... msg) {
+            Toast.makeText(context, msg[0], Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
         protected void onPostExecute(String result) {
             if (isCancelled() || result == null) return;
+            Toast.makeText(context, context.getString(R.string.finished), Toast.LENGTH_SHORT).show();
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
             applyOnClick(context, remoteViews, targetWidgetId);
             switch (item) {
